@@ -12,10 +12,10 @@ module Lockdown
           end
         end
     
-        def link_to_secured(name, options = {}, html_options = nil)
+        def link_to_secured(name, options = {}, html_options = {})
           url = url_for(options)
 
-          method = html_options ? html_options[:method] : :get
+          method = html_options[:method] ? html_options[:method] : :get
 
           if authorized?(url, method)
             return link_to_open(name, url, html_options)
@@ -23,10 +23,10 @@ module Lockdown
           return ""
         end
 
-        def button_to_secured(name, options = {}, html_options = nil)
+        def button_to_secured(name, options = {}, html_options = {})
           url = url_for(options)
 
-          method = html_options ? html_options[:method] : :get
+          method = html_options[:method] ? html_options[:method] : :get
 
           if authorized?(url, method)
             return button_to_open(name, url, html_options)
@@ -34,7 +34,7 @@ module Lockdown
           return ""
         end
 
-        def link_to_or_show(name, options = {}, html_options = nil)
+        def link_to_or_show(name, options = {}, html_options = {})
           lnk = link_to(name, options, html_options)
           lnk.length == 0 ? name : lnk
         end
